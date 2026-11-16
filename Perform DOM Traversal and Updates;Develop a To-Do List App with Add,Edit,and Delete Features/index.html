@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>To-Do List</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #eee;
+    text-align: center;
+    padding: 30px;
+}
+
+.container {
+    background: white;
+    width: 500px;
+    margin: auto;
+    padding: 20px;
+}
+
+input {
+    padding: 10px;
+}
+
+button {
+    padding: 8px;
+    margin: 3px;
+}
+
+li {
+    margin: 10px;
+    padding: 10px;
+    background: #ddd;
+    list-style: none;
+}
+
+.done {
+    text-decoration: line-through;
+    color: gray;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>My To-Do List</h2>
+
+<p>Ayush Katekhaye | 24070521161</p>
+
+<input id="task" placeholder="Enter task">
+<button onclick="addTask()">Add</button>
+
+<ul id="list"></ul>
+
+</div>
+
+<script>
+
+function addTask() {
+
+    let input = document.getElementById("task");
+    let value = input.value.trim();
+
+    // Check empty input
+    if (value === "") {
+        alert("Enter a task");
+        return;
+    }
+
+    // Create elements
+    let li = document.createElement("li");
+    let text = document.createElement("span");
+    let edit = document.createElement("button");
+    let del = document.createElement("button");
+
+    // Set text
+    text.innerText = value;
+    edit.innerText = "Edit";
+    del.innerText = "Delete";
+
+    // Complete task
+    text.onclick = function () {
+        text.classList.toggle("done");
+    };
+
+    // Edit task
+    edit.onclick = function () {
+
+        let newText = prompt("Edit task:", text.innerText);
+
+        // Check Cancel and empty input
+        if (newText !== null && newText.trim() !== "") {
+            text.innerText = newText.trim();
+        }
+
+    };
+
+    // Delete task
+    del.onclick = function () {
+        li.remove();
+    };
+
+    // Add elements to li
+    li.appendChild(text);
+    li.appendChild(edit);
+    li.appendChild(del);
+
+    // Add li to list
+    document.getElementById("list").appendChild(li);
+
+    // Clear input
+    input.value = "";
+}
+
+</script>
+
+</body>
+</html>
