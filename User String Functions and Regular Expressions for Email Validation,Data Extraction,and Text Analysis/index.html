@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>String Analyzer</title>
+
+<style>
+body{font-family:Arial;background:lightblue;padding:30px}
+div{background:white;padding:20px;max-width:600px;margin:auto}
+textarea,input{width:100%;padding:10px;margin:5px 0}
+button{padding:10px;background:blue;color:white}
+</style>
+
+</head>
+
+<body>
+
+<div>
+
+<h2>Ayush Katekhaye</h2>
+<h2>24070521161</h2>
+
+<h1>String Analyzer</h1>
+
+<textarea id="t" rows="6">
+Hello Ayush!
+Email: ayush@gmail.com
+Test: test@example.com
+Invalid: abc@gmail
+</textarea>
+
+<input id="s" placeholder="Search text">
+
+<button onclick="analyze()">Analyze</button>
+
+<p id="r"></p>
+
+</div>
+
+<script>
+
+function analyze(){
+
+let t=document.getElementById("t").value;
+let s=document.getElementById("s").value;
+
+let emails=t.match(
+/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g
+)||[];
+
+document.getElementById("r").innerHTML=
+"<b>Uppercase:</b> "+t.toUpperCase()+"<br>"+
+"<b>Lowercase:</b> "+t.toLowerCase()+"<br>"+
+"<b>Length:</b> "+t.length+"<br>"+
+"<b>Search:</b> "+(t.toLowerCase().includes(s.toLowerCase())?"Found":"Not Found")+"<br>"+
+"<b>Valid Emails:</b> "+emails.join(", ")+"<br>"+
+"<b>Words:</b> "+t.trim().split(/\s+/).join(", ");
+
+}
+
+</script>
+
+</body>
+</html
