@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Theme Settings</title>
+
+<style>
+
+body {
+    font-family: Arial;
+    text-align: center;
+    padding: 50px;
+    background: #eee;
+}
+
+.box {
+    background: white;
+    padding: 30px;
+    max-width: 400px;
+    margin: auto;
+}
+
+.dark {
+    background: #222;
+    color: white;
+}
+
+.dark .box {
+    background: #333;
+    color: white;
+}
+
+button, select {
+    padding: 10px;
+    margin: 5px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Theme Settings</h2>
+
+<p>Ayush Katekhaye | 24070521161</p>
+
+<select id="theme" onchange="changeTheme()">
+
+    <option value="light">☀️ Light</option>
+    <option value="dark">🌙 Dark</option>
+
+</select>
+
+<br>
+
+<button onclick="saveLocal()">Save Local</button>
+
+<button onclick="saveSession()">Save Session</button>
+
+<button onclick="clearData()">Clear</button>
+
+<p id="msg">Select a theme</p>
+
+<p>Local: <span id="local">Empty</span></p>
+
+<p>Session: <span id="session">Empty</span></p>
+
+</div>
+
+
+<script>
+
+let t = document.getElementById("theme");
+
+let msg = document.getElementById("msg");
+
+let local = document.getElementById("local");
+
+let session = document.getElementById("session");
+
+
+function changeTheme() {
+
+    document.body.className = t.value;
+
+}
+
+
+function saveLocal() {
+
+    localStorage.setItem("theme", t.value);
+
+    changeTheme();
+
+    msg.innerText = "Saved in Local Storage";
+
+    show();
+
+}
+
+
+function saveSession() {
+
+    sessionStorage.setItem("theme", t.value);
+
+    changeTheme();
+
+    msg.innerText = "Saved in Session Storage";
+
+    show();
+
+}
+
+
+function clearData() {
+
+    localStorage.removeItem("theme");
+
+    sessionStorage.removeItem("theme");
+
+    t.value = "light";
+
+    changeTheme();
+
+    msg.innerText = "Data Cleared";
+
+    show();
+
+}
+
+
+function show() {
+
+    local.innerText =
+        localStorage.getItem("theme") || "Empty";
+
+    session.innerText =
+        sessionStorage.getItem("theme") || "Empty";
+
+}
+
+
+window.onload = function () {
+
+    t.value =
+        localStorage.getItem("theme") ||
+        sessionStorage.getItem("theme") ||
+        "light";
+
+    changeTheme();
+
+    show();
+
+};
+
+</script>
+
+</body>
+
+</html>
