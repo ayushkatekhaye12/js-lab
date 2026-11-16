@@ -1,0 +1,97 @@
+!DOCTYPE html>
+<html>
+<head>
+<title>Gym Admission Form</title>
+
+<style>
+body{font-family:Arial;background:#eee;padding:30px}
+form{background:white;padding:25px;max-width:500px;margin:auto}
+input,select{width:100%;padding:10px;margin:8px 0}
+button{padding:10px;background:green;color:white;border:0}
+.error{color:red}.ok{color:green}
+</style>
+</head>
+
+<body>
+
+<form onsubmit="return submitForm()">
+
+<h2>IronFit Gym Admission</h2>
+<p>Ayush Katekhaye | 24070521161</p>
+
+<input id="name" placeholder="Full Name">
+<input id="email" placeholder="Email">
+<input id="mobile" placeholder="Mobile Number">
+<input id="age" type="number" placeholder="Age">
+
+<select id="gender">
+    <option value="">Select Gender</option>
+    <option>Male</option>
+    <option>Female</option>
+    <option>Other</option>
+</select>
+
+<select id="plan">
+    <option value="">Select Membership</option>
+    <option>Monthly - ₹999</option>
+    <option>Quarterly - ₹2499</option>
+    <option>Yearly - ₹7999</option>
+</select>
+
+<button>Join Gym</button>
+
+<p id="msg"></p>
+
+</form>
+
+<script>
+
+function submitForm(){
+
+let name=document.getElementById("name").value.trim();
+let email=document.getElementById("email").value.trim();
+let mobile=document.getElementById("mobile").value.trim();
+let age=document.getElementById("age").value;
+let gender=document.getElementById("gender").value;
+let plan=document.getElementById("plan").value;
+
+let emailReg=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+let mobileReg=/^[6-9]\d{9}$/;
+
+if(name.length<3 || !/^[A-Za-z ]+$/.test(name)){
+    msg("Invalid Name");
+    return false;
+}
+
+if(!emailReg.test(email)){
+    msg("Invalid Email");
+    return false;
+}
+
+if(!mobileReg.test(mobile)){
+    msg("Invalid Mobile");
+    return false;
+}
+
+if(age<18 || age>80){
+    msg("Age must be 18-80");
+    return false;
+}
+
+if(gender=="" || plan==""){
+    msg("Please select Gender and Membership");
+    return false;
+}
+
+msg("Admission Successful! Welcome "+name);
+return false;
+}
+
+function msg(text){
+    document.getElementById("msg").innerText=text;
+}
+
+</script>
+
+</body>
+</html>
