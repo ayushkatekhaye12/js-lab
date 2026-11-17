@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Palindrome</title>
+<style>
+body{text-align:center;font-family:Arial;padding:40px}
+.box{background:#eee;padding:25px;width:350px;margin:auto}
+input,button{padding:10px;margin:5px}
+</style>
+</head>
+
+<body>
+<div class="box">
+<h2>Palindrome Checker</h2>
+<p>Ayush Katekhaye | 24070521161</p>
+
+<input id="text" placeholder="Enter text">
+<button onclick="check()">Check</button>
+<p id="result"></p>
+</div>
+
+<script>
+let app="Palindrome";              // Global
+
+function counterFn(){              // Closure
+    let count=0;                   // Local
+    return ()=>++count;
+}
+let counter=counterFn();
+
+function check(){                  // Function Declaration
+    try{
+        let x=document.getElementById("text").value;
+        if(x.trim()=="") throw "Enter text";
+
+        let clean=function(s){     // Function Expression
+            return s.toLowerCase().replace(/[^a-z0-9]/g,"");
+        };
+
+        let rev=s=>s.split("").reverse().join(""); // Arrow
+
+        x=clean(x);
+
+        document.getElementById("result").innerHTML =
+        x==rev(x) ? "✅ Palindrome<br>Checked: "+counter()
+                  : "❌ Not Palindrome<br>Checked: "+counter();
+    }
+    catch(e){
+        document.getElementById("result").innerHTML="⚠️ "+e;
+    }
+}
+</script>
+</body>
+</html>
