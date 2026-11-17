@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Student Information</title>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+
+body {
+    text-align: center;
+    font-family: Arial;
+    background: #eee;
+}
+
+.box {
+    background: white;
+    padding: 25px;
+    margin: 50px auto;
+    width: 400px;
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+}
+
+#output {
+    text-align: left;
+    margin-top: 20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>🎓 Student Information</h2>
+
+<button id="fetch">Load using fetch()</button>
+
+<button id="get">Load using $.get()</button>
+
+<div id="output">
+    Click a button
+</div>
+
+</div>
+
+
+<script>
+
+// Student JSON data
+let student = {
+    "name": "Ayush Katekhaye",
+    "prn": "24070521161",
+    "course": "Computer Science Engineering",
+    "year": "3rd Year",
+    "college": "SIT Nagpur",
+    "email": "ayush@example.com"
+};
+
+
+// Display student information
+function show(d, method) {
+
+    $("#output").html(`
+
+        <h3>Student Details</h3>
+
+        <b>Name:</b> ${d.name}<br>
+
+        <b>PRN:</b> ${d.prn}<br>
+
+        <b>Course:</b> ${d.course}<br>
+
+        <b>Year:</b> ${d.year}<br>
+
+        <b>College:</b> ${d.college}<br>
+
+        <b>Email:</b> ${d.email}<br>
+
+        <b>Method:</b> ${method}
+
+    `);
+}
+
+
+// fetch() button
+$("#fetch").click(function() {
+
+    // Convert JavaScript object into JSON string
+    let jsonData = JSON.stringify(student);
+
+    // Create a data URL
+    let url = "data:application/json," + encodeURIComponent(jsonData);
+
+    fetch(url)
+
+        .then(r => r.json())
+
+        .then(d => show(d, "fetch()"))
+
+        .catch(() => $("#output").text("Error loading JSON"));
+
+});
+
+
+// $.get() button
+$("#get").click(function() {
+
+    // Create a data URL containing JSON
+    let jsonData = JSON.stringify(student);
+
+    let url = "data:application/json," + encodeURIComponent(jsonData);
+
+    $.get(url, function(d) {
+
+        show(d, "$.get()");
+
+    })
+
+    .fail(function() {
+
+        $("#output").text("Error loading JSON");
+
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>
