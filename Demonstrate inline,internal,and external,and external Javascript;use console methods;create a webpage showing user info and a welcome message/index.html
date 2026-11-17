@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>User Information</title>
+
+<style>
+body{text-align:center;font-family:Arial;margin-top:80px}
+div{width:300px;margin:auto;padding:20px;border:1px solid gray}
+input,button{padding:8px;margin:5px}
+</style>
+
+<script>
+function welcome(){                         // Internal JS
+    let n=document.getElementById("name").value;
+    document.getElementById("msg").innerHTML="Welcome "+n;
+    console.log("Welcome message displayed");
+}
+</script>
+
+</head>
+
+<body>
+
+<div>
+<h2>User Information</h2>
+
+<input id="name" placeholder="Enter Name"><br>
+<input id="age" placeholder="Enter Age"><br>
+
+<button onclick="welcome()">Welcome</button> <!-- Inline JS -->
+
+<p id="msg"></p>
+</div>
+
+<script src="script.js"></script> <!-- External JS -->
+
+</body>
+</html>
