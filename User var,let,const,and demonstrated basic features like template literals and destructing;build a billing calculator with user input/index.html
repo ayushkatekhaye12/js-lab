@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Billing Calculator</title>
+<style>
+body{text-align:center;font-family:Arial;margin-top:100px}
+div{width:300px;margin:auto;padding:20px;border:1px solid #aaa}
+input,button{padding:8px;margin:5px}
+</style>
+</head>
+
+<body>
+<div>
+<h2>Billing Calculator</h2>
+
+<input id="item" placeholder="Item"><br>
+<input id="price" type="number" placeholder="Price"><br>
+<input id="qty" type="number" placeholder="Quantity"><br>
+<button onclick="bill()">Calculate</button>
+
+<p id="out"></p>
+</div>
+
+<script>
+function bill(){
+    var item=document.getElementById("item").value;
+    let price=Number(document.getElementById("price").value);
+    const qty=Number(document.getElementById("qty").value);
+
+    let data=[item,price,qty];
+    let [name,p,q]=data;       // Destructuring
+
+    let total=p*q;
+
+    document.getElementById("out").innerHTML=
+        `Item: ${name}<br>Price: ₹${p}<br>Quantity: ${q}<br>Total: ₹${total}`;
+}
+</script>
+
+</body>
+</html>
